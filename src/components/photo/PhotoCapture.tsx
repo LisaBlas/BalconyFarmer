@@ -6,7 +6,7 @@ export default function PhotoCapture() {
   const setPhoto = useAppStore((s) => s.setPhoto)
 
   const fakeCapture = () => {
-    setPhoto("/images/balconybefore.jpg")
+    setPhoto(`${import.meta.env.BASE_URL}images/balconybefore.jpg`)
   }
 
   if (photo) {

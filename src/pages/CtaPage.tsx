@@ -29,7 +29,7 @@ export default function CtaPage() {
         {/* After image */}
         <div className="rounded-2xl overflow-hidden mb-6">
           <img
-            src="/images/balconyafter.png"
+            src={`${import.meta.env.BASE_URL}images/balconyafter.png`}
             alt="Your balcony transformed into a garden"
             className="w-full aspect-[4/3] object-cover"
           />

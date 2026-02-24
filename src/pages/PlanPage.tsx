@@ -48,7 +48,7 @@ export default function PlanPage() {
             <div className="bg-white border-2 border-card-border rounded-2xl overflow-hidden flex-1 flex flex-col">
               <div className="flex-1 p-4">
                 <img
-                  src="/images/balconyafter.png"
+                  src={`${import.meta.env.BASE_URL}images/balconyafter.png`}
                   alt="Your balcony transformed into a garden"
                   className="w-full h-full object-cover rounded-xl"
                 />
@@ -305,7 +305,7 @@ function NeighboursTab() {
 
       <div className="rounded-xl overflow-hidden border-2 border-card-border">
         <img
-          src="/images/balconyafter.png"
+          src={`${import.meta.env.BASE_URL}images/balconyafter.png`}
           alt="Berte101's balcony plan"
           className="w-full h-40 object-cover"
         />
