@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route } from "react-router-dom"
 import HomePage from "./pages/HomePage"
 import QuestionnairePage from "./pages/QuestionnairePage"
 import LoadingPage from "./pages/LoadingPage"
@@ -8,7 +8,7 @@ import MapPage from "./pages/MapPage"
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/questionnaire" element={<QuestionnairePage />} />
@@ -17,6 +17,6 @@ export default function App() {
         <Route path="/cta" element={<CtaPage />} />
         <Route path="/map" element={<MapPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
