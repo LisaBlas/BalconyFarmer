@@ -4,8 +4,15 @@ import plantsData from "../data/plants.json"
 const sunMapping: Record<string, SunRequirement> = plantsData.matchingRules.sunMapping as Record<string, SunRequirement>
 const difficultyOrder = ["beginner", "intermediate", "advanced"]
 
+// Limit to 10 plants for prototype (only these need thumbnail images)
+const protoPlantIds = new Set([
+  "cherry-tomato", "basil", "mint", "strawberry", "chives",
+  "lavender", "geranium", "fuchsia", "wildflower-mix", "hosta",
+  "lettuce", "nasturtium", "climbing-beans",
+])
+
 export function matchPlants(answers: QuestionnaireAnswers): PlanResult {
-  const plants = plantsData.plants as Plant[]
+  const plants = (plantsData.plants as Plant[]).filter((p) => protoPlantIds.has(p.id))
   const userSun = answers.orientation ? sunMapping[answers.orientation] : "partial-shade"
   const userDiffIdx = answers.experience ? difficultyOrder.indexOf(answers.experience) : 2
   const spaceTypes: string[] = []

@@ -39,7 +39,7 @@ export default function CtaPage() {
           Create account
         </Button>
 
-        <p className="text-white/80 text-sm leading-relaxed mb-8">
+        <p className="text-white/80 text-base leading-relaxed mb-8">
           With an account you can manage your tasks and get expert help and advice. We'll coach you through the whole process from setting up to maintenance and harvest.
         </p>
 
@@ -52,6 +52,14 @@ export default function CtaPage() {
           >
             <span className="w-8 h-8 rounded-lg bg-cream/20 flex items-center justify-center shrink-0">📄</span>
             <span className="font-medium">Download PDF plan</span>
+          </button>
+
+          <button
+            onClick={() => { navigate("/plan"); window.scrollTo(0, 0) }}
+            className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white text-left hover:bg-white/15 transition-colors"
+          >
+            <span className="w-8 h-8 rounded-lg bg-cream/20 flex items-center justify-center shrink-0">🌱</span>
+            <span className="font-medium">Back to my plan</span>
           </button>
 
           <button
@@ -74,7 +82,7 @@ export default function CtaPage() {
 
       {/* Toast */}
       {toastVisible && (
-        <div className="fixed bottom-6 left-6 right-6 bg-text text-white rounded-xl px-5 py-4 text-sm font-medium shadow-lg animate-[fadeIn_0.2s_ease-out] text-center">
+        <div className="fixed bottom-6 left-6 right-6 bg-text text-white rounded-xl px-5 py-4 text-base font-medium shadow-lg animate-[fadeIn_0.2s_ease-out] text-center">
           PDF download coming soon!
         </div>
       )}

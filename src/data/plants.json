@@ -592,6 +592,25 @@
       "image": "/images/plants/hosta.jpg",
       "quantity": 1,
       "materials": ["Large pot (30cm+)", "Rich, moisture-retaining soil"]
+    },
+    {
+      "id": "climbing-beans",
+      "name": "Climbing Beans",
+      "scientificName": "Phaseolus vulgaris",
+      "category": ["edible"],
+      "sunRequirement": "full-sun",
+      "difficulty": "beginner",
+      "spaceTypes": ["floor", "wall"],
+      "wallCompatibility": ["brick", "metal"],
+      "wateringFrequency": "Daily in summer",
+      "minSpaceSqm": 0.3,
+      "description": "Vertical growing superstars — climbing beans turn a bare wall into a productive green curtain packed with fresh pods.",
+      "careNotes": "Needs a trellis or strings to climb (2m height). Sow after last frost. Pick pods regularly to encourage more growth.",
+      "harvestMonth": "July–September",
+      "sowingMonth": "May (direct sow outside)",
+      "image": "/images/plants/climbing-beans.jpg",
+      "quantity": 2,
+      "materials": ["Large pot (30cm+)", "Potting soil", "Trellis or string support", "Slow-release fertilizer"]
     }
   ],
   "materials": {

@@ -22,7 +22,7 @@ export default function PhotoCapture() {
         <button
           type="button"
           onClick={() => setPhoto(null)}
-          className="text-sm text-text-secondary underline underline-offset-2"
+          className="text-base text-text-secondary underline underline-offset-2"
         >
           Retake photo
         </button>

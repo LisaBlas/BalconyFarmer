@@ -160,14 +160,20 @@ function PlantsTab({
           <button
             key={p.id}
             onClick={() => onSelect(p)}
-            className={`relative shrink-0 w-20 h-20 rounded-xl border-2 flex items-center justify-center text-3xl transition-all ${
-              selectedPlant?.id === p.id
-                ? "border-forest bg-mint/50"
-                : "border-card-border bg-mint/20"
-            }`}
+            className={`relative shrink-0 w-20 h-20 transition-all`}
           >
-            <span className="text-2xl">{p.category.includes("edible") ? "🌿" : p.category.includes("biodiversity") ? "🌼" : "🌸"}</span>
-            <span className="absolute -top-2 -right-2 bg-lime text-text text-[11px] font-bold rounded-full w-6 h-6 flex items-center justify-center">
+            <div className={`w-full h-full rounded-xl border-2 overflow-hidden ${
+              selectedPlant?.id === p.id
+                ? "border-forest ring-2 ring-forest"
+                : "border-card-border"
+            }`}>
+              <img
+                src={`${import.meta.env.BASE_URL}images/plants/${p.id}.jpg`}
+                alt={p.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="absolute -top-2 -right-2 z-10 bg-lime text-text text-[11px] font-bold rounded-full w-6 h-6 flex items-center justify-center">
               {p.quantity}×
             </span>
           </button>
@@ -177,9 +183,16 @@ function PlantsTab({
       {/* Selected plant detail */}
       {selectedPlant ? (
         <div className="flex flex-col gap-3">
+          <div className="rounded-xl overflow-hidden">
+            <img
+              src={`${import.meta.env.BASE_URL}images/plants/${selectedPlant.id}.jpg`}
+              alt={selectedPlant.name}
+              className="w-full h-48 object-cover"
+            />
+          </div>
           <h3 className="font-heading font-bold text-xl">{selectedPlant.name}</h3>
-          <p className="text-text-secondary text-sm leading-relaxed">{selectedPlant.description}</p>
-          <p className="text-text-secondary text-sm leading-relaxed">{selectedPlant.careNotes}</p>
+          <p className="text-text-secondary text-base leading-relaxed">{selectedPlant.description}</p>
+          <p className="text-text-secondary text-base leading-relaxed">{selectedPlant.careNotes}</p>
           <div className="grid grid-cols-2 gap-3 mt-1">
             <InfoPill label="Water" value={selectedPlant.wateringFrequency} />
             <InfoPill label="Sun" value={selectedPlant.sunRequirement.replace("-", " ")} />
@@ -188,10 +201,23 @@ function PlantsTab({
           </div>
         </div>
       ) : (
-        <p className="text-text-secondary text-sm">Tap a plant to see details</p>
+        <p className="text-text-secondary text-base">Tap a plant to see details</p>
       )}
     </div>
   )
+}
+
+function materialEmoji(name: string): string {
+  const n = name.toLowerCase()
+  if (n.includes("pot") || n.includes("container") || n.includes("planter")) return "🪴"
+  if (n.includes("soil") || n.includes("compost")) return "🟫"
+  if (n.includes("fertiliz") || n.includes("fertilis") || n.includes("feed")) return "💧"
+  if (n.includes("trellis") || n.includes("string") || n.includes("support") || n.includes("cage") || n.includes("stake")) return "🪜"
+  if (n.includes("seed")) return "🌱"
+  if (n.includes("water")) return "🚿"
+  if (n.includes("glove")) return "🧤"
+  if (n.includes("tool") || n.includes("trowel") || n.includes("scissors")) return "✂️"
+  return "📦"
 }
 
 function MaterialsTab({ materials }: { materials: { name: string; quantity: number; unit: string }[] }) {
@@ -202,7 +228,7 @@ function MaterialsTab({ materials }: { materials: { name: string; quantity: numb
         {materials.map((m) => (
           <div key={m.name} className="flex items-center gap-4 py-2">
             <span className="w-10 h-10 rounded-lg bg-mint flex items-center justify-center text-lg shrink-0">
-              📦
+              {materialEmoji(m.name)}
             </span>
             <div className="flex-1 min-w-0">
               <p className="font-medium text-base truncate">{m.name}</p>
@@ -256,7 +282,7 @@ function CalendarTab({ calendar }: { calendar: { date: string; task: string }[] 
       <h2 className="font-heading font-bold text-lg">Your first tasks</h2>
 
       <div className="bg-mint/30 rounded-xl p-4">
-        <p className="text-text-secondary text-sm leading-relaxed">
+        <p className="text-text-secondary text-base leading-relaxed">
           You can start these tasks once you have gathered the relevant materials — we have given you a default of 2 weeks from now to gather everything. You can change this schedule with an account.
         </p>
       </div>
@@ -268,11 +294,11 @@ function CalendarTab({ calendar }: { calendar: { date: string; task: string }[] 
             tasks.map((task, i) => (
               <div key={i} className="flex items-start gap-3 pl-1">
                 <span className="w-4 h-4 mt-1 rounded border-2 border-mint-border shrink-0" />
-                <p className="text-text-secondary text-sm leading-relaxed">{task}</p>
+                <p className="text-text-secondary text-base leading-relaxed">{task}</p>
               </div>
             ))
           ) : (
-            <p className="text-text-secondary/50 text-sm pl-1">No tasks</p>
+            <p className="text-text-secondary/50 text-base pl-1">No tasks</p>
           )}
         </div>
       ))}
@@ -284,10 +310,11 @@ function CalendarTab({ calendar }: { calendar: { date: string; task: string }[] 
 
 function NeighboursTab() {
   const neighbourPlants = [
-    { name: "Lavender", icon: "🌸", quantity: 3 },
-    { name: "Rosemary", icon: "🌿", quantity: 2 },
-    { name: "Strawberries", icon: "🍓", quantity: 4 },
-    { name: "Marigolds", icon: "🌼", quantity: 3 },
+    { name: "Lettuce", icon: "🥬", quantity: 3 },
+    { name: "Mint", icon: "🌿", quantity: 2 },
+    { name: "Chives", icon: "🌱", quantity: 2 },
+    { name: "Hosta", icon: "🪴", quantity: 1 },
+    { name: "Fuchsia", icon: "🌺", quantity: 2 },
   ]
 
   return (
@@ -298,14 +325,14 @@ function NeighboursTab() {
       </div>
 
       <div className="bg-mint/30 rounded-xl p-4">
-        <p className="text-text-secondary text-sm leading-relaxed">
+        <p className="text-text-secondary text-base leading-relaxed">
           Your plans have been analyzed and compared to find ways your balconies can complement each other. Your materials lists have been combined to help you gather things more efficiently.
         </p>
       </div>
 
       <div className="rounded-xl overflow-hidden border-2 border-card-border">
         <img
-          src={`${import.meta.env.BASE_URL}images/balconyafter.png`}
+          src={`${import.meta.env.BASE_URL}images/bertebalcony.png`}
           alt="Berte101's balcony plan"
           className="w-full h-40 object-cover"
         />
@@ -329,9 +356,9 @@ function NeighboursTab() {
       </div>
 
       <div className="bg-forest/10 rounded-xl p-4 mt-1">
-        <p className="font-heading font-bold text-sm mb-1">Complementary match</p>
-        <p className="text-text-secondary text-sm leading-relaxed">
-          Berte101 grows pollinator-friendly flowers while you focus on edibles — together your balconies create a mini ecosystem that benefits both!
+        <p className="font-heading font-bold text-base mb-1">Complementary match</p>
+        <p className="text-text-secondary text-base leading-relaxed">
+          Berte101's shadier balcony is perfect for leafy greens and herbs — together you can share harvests and cover a wider range of plants than either balcony could alone!
         </p>
       </div>
     </div>
@@ -354,7 +381,7 @@ function MiniCalendar({ taskDates }: { taskDates: Set<string> }) {
 
   return (
     <div className="bg-white border-2 border-card-border rounded-xl p-4">
-      <p className="font-heading font-bold text-sm mb-3 text-center">March 2026</p>
+      <p className="font-heading font-bold text-base mb-3 text-center">March 2026</p>
       <div className="grid grid-cols-7 gap-y-1">
         {weekdays.map((wd) => (
           <span key={wd} className="text-[10px] text-text-secondary font-medium text-center">
@@ -386,7 +413,7 @@ function InfoPill({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-mint/40 rounded-lg px-3 py-2">
       <p className="text-[11px] text-mint-border font-medium uppercase tracking-wide">{label}</p>
-      <p className="text-sm font-medium text-text mt-0.5">{value}</p>
+      <p className="text-base font-medium text-text mt-0.5">{value}</p>
     </div>
   )
 }
