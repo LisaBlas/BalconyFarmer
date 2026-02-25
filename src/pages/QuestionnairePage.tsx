@@ -70,10 +70,29 @@ const steps = [
   },
 ]
 
+function useStepValid(step: number): boolean {
+  const a = useAppStore((s) => s.answers)
+  const photo = useAppStore((s) => s.photo)
+
+  switch (step) {
+    case 1: return !!(a.street && a.postcode && a.region)
+    case 2: return !!(a.orientation && a.wallType)
+    case 3: return !!(a.floorSpace && a.railingSpace && a.wallSpace)
+    case 4: return !!a.budget
+    case 5: return a.goals.length > 0
+    case 6: return !!a.experience
+    case 7: return !!a.timeCommitment
+    case 8: return !!a.neighbours
+    case 9: return !!photo
+    default: return true
+  }
+}
+
 export default function QuestionnairePage() {
   const navigate = useNavigate()
   const step = useAppStore((s) => s.step)
   const setStep = useAppStore((s) => s.setStep)
+  const valid = useStepValid(step)
 
   const idx = step - 1
   const current = steps[idx] || steps[0]
@@ -87,6 +106,7 @@ export default function QuestionnairePage() {
   }
 
   const goNext = () => {
+    if (!valid) return
     if (isLast) navigate("/loading")
     else setStep(step + 1)
   }
@@ -116,7 +136,7 @@ export default function QuestionnairePage() {
           Back
         </Button>
         <div className="flex-1" />
-        <Button variant="primary" onClick={goNext}>
+        <Button variant="primary" onClick={goNext} disabled={!valid}>
           {isLast ? "Done!" : "Next"}
         </Button>
       </footer>

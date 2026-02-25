@@ -14,9 +14,13 @@ const styles = {
     "text-text-secondary font-medium py-2 px-4 rounded-xl hover:bg-text/5 transition-all",
 }
 
-export default function Button({ variant = "primary", className = "", children, ...props }: ButtonProps) {
+export default function Button({ variant = "primary", className = "", disabled, children, ...props }: ButtonProps) {
   return (
-    <button className={`${styles[variant]} ${className}`} {...props}>
+    <button
+      className={`${styles[variant]} ${disabled ? "opacity-40 pointer-events-none" : ""} ${className}`}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </button>
   )
