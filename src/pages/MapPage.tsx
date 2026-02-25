@@ -95,7 +95,7 @@ export default function MapPage() {
           <br />
           in your hood!
         </h1>
-        <p className="text-text-secondary text-sm leading-relaxed mb-5">
+        <p className="text-text-secondary text-base leading-relaxed mb-5">
           Look around for inspiration. With an account you can contact other farmers directly!
         </p>
 
@@ -115,8 +115,8 @@ export default function MapPage() {
             <GardenCarousel gardenId={selected.id} />
             <div className="p-5 pt-3">
               <h3 className="font-heading font-bold text-base mb-1">{selected.title}</h3>
-              <p className="text-mint-border text-sm font-medium mb-2">@{selected.username}</p>
-              <p className="text-text-secondary text-sm leading-relaxed">{selected.description}</p>
+              <p className="text-mint-border text-base font-medium mb-2">@{selected.username}</p>
+              <p className="text-text-secondary text-base leading-relaxed">{selected.description}</p>
             </div>
           </div>
         )}
@@ -125,17 +125,17 @@ export default function MapPage() {
   )
 }
 
-const gardenColors: Record<string, string[]> = {
-  "garden-1": ["#6BAF73", "#8BC99A", "#A3D9B1"],
-  "garden-2": ["#D4A5E5", "#C8F540", "#6BAF73"],
-  "garden-3": ["#F5A840", "#E87C5D", "#6BAF73"],
-  "garden-4": ["#E85D75", "#C8F540", "#8BC99A"],
-  "garden-5": ["#5DB8E8", "#A3D9B1", "#C8F540"],
+const gardenImages: Record<string, string[]> = {
+  "garden-1": ["Urbangreenberlin1.jpg", "Urbangreenberlin2.jpg", "Urbangreenberlin3.jpg"],
+  "garden-2": ["Bienemaja421.png", "Bienemaja422.jpg", "Bienemaja423.jpg"],
+  "garden-3": ["Tomatenkarl1.jpg", "Tomatenkarl2.jpg", "Tomatenkarl3.png"],
+  "garden-4": ["Balkonlisa1.jpg", "Balkonlisa2.jpg", "Balkonlisa3.jpg"],
+  "garden-5": ["Gruenermax1.jpg", "Gruenermax2.jpg", "Gruenermax3.jpg"],
 }
 
 function GardenCarousel({ gardenId }: { gardenId: string }) {
   const [active, setActive] = useState(0)
-  const colors = gardenColors[gardenId] ?? gardenColors["garden-1"]
+  const images = gardenImages[gardenId] ?? gardenImages["garden-1"]
 
   useEffect(() => {
     setActive(0)
@@ -150,11 +150,11 @@ function GardenCarousel({ gardenId }: { gardenId: string }) {
 
   return (
     <div className="relative">
-      <div className="w-full h-36 flex items-center justify-center transition-colors duration-500" style={{ backgroundColor: colors[active] }}>
-        <span className="text-4xl">
-          {active === 0 ? "🌱" : active === 1 ? "🌿" : "🌻"}
-        </span>
-      </div>
+      <img
+        src={`${import.meta.env.BASE_URL}images/gardens/${images[active]}`}
+        alt={`Garden photo ${active + 1}`}
+        className="w-full h-36 object-cover"
+      />
       {/* Navigation dots */}
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
         {[0, 1, 2].map((i) => (

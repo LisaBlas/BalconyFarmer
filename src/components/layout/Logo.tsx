@@ -11,8 +11,12 @@ export default function Logo({ className = "" }: { className?: string }) {
       className={`flex items-center gap-2 ${className}`}
       aria-label="Go to home page"
     >
-      <span className="w-10 h-10 rounded-xl bg-text text-cream flex items-center justify-center font-heading text-lg font-bold">
-        ✳
+      <span className="w-10 h-10 rounded-xl bg-text flex items-center justify-center">
+        <img
+          src={`${import.meta.env.BASE_URL}images/logo.png`}
+          alt="BalkonGrün"
+          className="w-6 h-6 object-contain"
+        />
       </span>
     </button>
   )

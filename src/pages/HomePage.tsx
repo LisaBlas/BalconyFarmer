@@ -13,6 +13,17 @@ export default function HomePage() {
         <Logo />
       </header>
 
+      {/* Hero image */}
+      <div className="px-6 pt-4">
+        <div className="max-w-md mx-auto w-full rounded-2xl overflow-hidden border-3 border-lime">
+          <img
+            src={`${import.meta.env.BASE_URL}images/hero.jpg`}
+            alt="Balcony garden inspiration"
+            className="w-full aspect-[16/9] object-cover"
+          />
+        </div>
+      </div>
+
       {/* Hero */}
       <main className="flex-1 flex flex-col px-6 pt-6 pb-10">
         <div className="max-w-md mx-auto w-full flex flex-col">
@@ -87,12 +98,25 @@ export default function HomePage() {
           </section>
 
           {/* About */}
-          <section className="mt-12 mb-4">
-            <h2 className="font-heading text-xl font-bold mb-3">What is BalkonGrün?</h2>
-            <p className="text-text-secondary text-sm leading-relaxed">
-              A free tool that helps Berlin residents plan and set up their balcony gardens.
-              Answer a few questions, get a personalised plan — and start growing.
-            </p>
+          <section
+            className="mt-12 mb-4 relative overflow-hidden rounded-2xl bg-white border-2 border-card-border p-6"
+            style={{
+              backgroundImage: `url(${import.meta.env.BASE_URL}images/logo.png)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <div className="absolute inset-0 bg-white/80 pointer-events-none" />
+            <div className="relative">
+              <h2 className="font-heading text-xl font-bold mb-3">About balcony farmer</h2>
+              <p className="text-text-secondary text-base leading-relaxed">
+                We've noticed the unused potential of balcony spaces in urban areas and we want to change that! We believe that everyone should have the opportunity to grow their own plants, no matter where they live or what skills and resources they have.
+              </p>
+              <p className="text-text-secondary text-base leading-relaxed mt-3">
+                Our plant recommendations are based on expert knowledge and scientific research, to ensure the best results for every user and every plant.
+              </p>
+            </div>
           </section>
         </div>
       </main>
@@ -107,7 +131,7 @@ function FeatureCard({ emoji, title, description }: { emoji: string; title: stri
         <span className="text-xl">{emoji}</span>
         <h3 className="font-heading font-bold text-base">{title}</h3>
       </div>
-      <p className="text-text-secondary text-sm leading-relaxed">{description}</p>
+      <p className="text-text-secondary text-base leading-relaxed">{description}</p>
     </div>
   )
 }
@@ -119,18 +143,20 @@ function Testimonial({ name, text }: { name: string; text: string }) {
         <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base bg-white/20">
           👤
         </div>
-        <span className="text-sm font-medium text-lime">{name}</span>
+        <span className="text-base font-medium text-lime">{name}</span>
       </div>
-      <p className="text-sm leading-relaxed text-white/90">{text}</p>
+      <p className="text-base leading-relaxed text-white/90">{text}</p>
     </div>
   )
 }
 
-const carouselColors = [
-  "#6BAF73", "#8BC99A", "#C8F540", "#D4A5E5", "#F5A840",
-  "#E87C5D", "#5DB8E8", "#A3D9B1", "#E85D75", "#C5F0D2",
+const carouselImages = [
+  "Urbangreenberlin1.jpg", "Bienemaja421.png",
+  "Tomatenkarl1.jpg", "Balkonlisa2.jpg",
+  "Gruenermax3.jpg", "Urbangreenberlin2.jpg",
+  "Tomatenkarl3.png", "Bienemaja423.jpg",
+  "Balkonlisa1.jpg", "Gruenermax1.jpg",
 ]
-const carouselEmojis = ["🌿", "🍅", "🌻", "🌸", "🌶️", "🍓", "🪻", "🌱", "🌼", "🫑"]
 
 function PossibilitiesCarousel() {
   const [active, setActive] = useState(0)
@@ -143,13 +169,12 @@ function PossibilitiesCarousel() {
   }, [])
 
   return (
-    <div className="relative rounded-2xl overflow-hidden">
-      <div
-        className="w-full aspect-[16/9] flex items-center justify-center transition-colors duration-500"
-        style={{ backgroundColor: carouselColors[active] }}
-      >
-        <span className="text-6xl">{carouselEmojis[active]}</span>
-      </div>
+    <div className="relative rounded-2xl overflow-hidden border-3 border-lime">
+      <img
+        src={`${import.meta.env.BASE_URL}images/gardens/${carouselImages[active]}`}
+        alt={`Balcony inspiration ${active + 1}`}
+        className="w-full aspect-[16/9] object-cover"
+      />
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
         {Array.from({ length: 10 }, (_, i) => (
           <button

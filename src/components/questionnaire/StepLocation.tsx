@@ -27,12 +27,14 @@ export default function StepLocation() {
         placeholder="e.g. 10999"
         value={answers.postcode}
         onChange={(e) => setAnswer("postcode", e.target.value)}
+        onFocus={autofill}
       />
       <Input
         label="Region"
         placeholder="e.g. Kreuzberg"
         value={answers.region}
         onChange={(e) => setAnswer("region", e.target.value)}
+        onFocus={autofill}
       />
     </div>
   )

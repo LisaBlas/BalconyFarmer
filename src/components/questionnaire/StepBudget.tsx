@@ -25,7 +25,7 @@ export default function StepBudget() {
           }`}
         >
           <span className="text-xl shrink-0">{o.icon}</span>
-          <span className="font-medium text-sm leading-snug">{o.label}</span>
+          <span className="font-medium text-base leading-snug">{o.label}</span>
           <span className={`ml-auto w-5 h-5 rounded-full border-2 flex items-center justify-center text-xs transition-all shrink-0 ${
             budget === o.value ? "bg-forest border-forest text-white" : "border-card-border"
           }`}>

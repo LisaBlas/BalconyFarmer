@@ -7,6 +7,14 @@ export default function StepSpace() {
   const setAnswer = useAppStore((s) => s.setAnswer)
   const [showRailingInfo, setShowRailingInfo] = useState(false)
 
+  const autofill = () => {
+    if (!answers.floorSpace && !answers.railingSpace && !answers.wallSpace) {
+      setAnswer("floorSpace", "2")
+      setAnswer("railingSpace", "2")
+      setAnswer("wallSpace", "2")
+    }
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <Input
@@ -17,6 +25,7 @@ export default function StepSpace() {
         placeholder="e.g. 3"
         value={answers.floorSpace}
         onChange={(e) => setAnswer("floorSpace", e.target.value)}
+        onFocus={autofill}
       />
 
       <div>
@@ -28,6 +37,7 @@ export default function StepSpace() {
           placeholder="e.g. 1.5"
           value={answers.railingSpace}
           onChange={(e) => setAnswer("railingSpace", e.target.value)}
+          onFocus={autofill}
         />
         <button
           type="button"
@@ -47,6 +57,7 @@ export default function StepSpace() {
         placeholder="e.g. 0.5"
         value={answers.wallSpace}
         onChange={(e) => setAnswer("wallSpace", e.target.value)}
+        onFocus={autofill}
       />
 
       {/* Railing info overlay */}
@@ -68,13 +79,13 @@ export default function StepSpace() {
                 ×
               </button>
             </div>
-            <p className="text-text-secondary text-sm leading-relaxed mb-3">
+            <p className="text-text-secondary text-base leading-relaxed mb-3">
               Not every building allows planters hanging on the outside of railings — especially in rented apartments. Planters that fall can injure people below.
             </p>
-            <p className="text-text-secondary text-sm leading-relaxed mb-3">
+            <p className="text-text-secondary text-base leading-relaxed mb-3">
               <span className="font-medium text-text">Check with your landlord</span> or building management before hanging anything outward.
             </p>
-            <p className="text-text-secondary text-sm leading-relaxed">
+            <p className="text-text-secondary text-base leading-relaxed">
               <span className="font-medium text-text">Tip:</span> Inward-facing planters are almost always fine and safer. We'll recommend those by default.
             </p>
           </div>
